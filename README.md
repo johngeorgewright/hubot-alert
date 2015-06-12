@@ -2,8 +2,6 @@
 
 Excepts HTTP POSTs to alert specific rooms
 
-See [`src/alert.coffee`](src/alert.coffee) for full documentation.
-
 ## Installation
 
 In hubot project repo, run:
@@ -16,9 +14,23 @@ Then add **hubot-alert** to your `external-scripts.json`:
 ["hubot-alert"]
 ```
 
+Export `HUBOT_ALERT_TOKEN`:
+
+```
+export HUBOT_ALERT_TOKEN=mysecrettoken
+```
+
 ## Sample Interaction
 
 ```
-user1>> hubot hello
-hubot>> hello!
+POST /hubot/alert/mysecrettoken
+level:    'error'  # Can be one of debug, verbose, info, warn or error
+rooms:    'shell'  # CSV of rooms to alert
+message:  'Some message to tell everyone'
+```
+
+The above request will alert the "shell" room with:
+
+```
+hubot> error: Some message to tell everyone
 ```
