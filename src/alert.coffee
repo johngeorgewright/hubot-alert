@@ -24,7 +24,7 @@ getAlertFromRequest = (req, res, next) ->
   catch e
     return next 'Cannot parse request'
   errors = []
-  {rooms, level, message} = data
+  {rooms, level, message, label} = data
   errors.push 'Need to specify what rooms' unless rooms?
   errors.push 'Need to specify a message' unless message?
   if errors.length
@@ -35,6 +35,7 @@ getAlertFromRequest = (req, res, next) ->
     level: level
     rooms: rooms
     message: message
+    label: label
   next()
 
 getLevelEmoji = (level) ->
@@ -51,9 +52,11 @@ module.exports = (robot) ->
 
   robot.router.post '/hubot/alert/:token', authenticate, getAlertFromRequest, (req, res) ->
     {alert} = req
+    from = originOf req
+    from = "#{alert.label} (#{from})" if alert.label
     alert.rooms.forEach (room) ->
       robot.messageRoom room, """
-        External message recieved from #{originOf req}
+        External message recieved from #{from}
         #{getLevelEmoji alert.level} #{alert.message}
       """
     res.send 'Alerted'
