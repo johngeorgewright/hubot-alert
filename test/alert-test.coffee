@@ -7,12 +7,9 @@ chai.use require 'sinon-chai'
 describe 'alert', ->
   beforeEach ->
     @robot =
-      respond: sinon.spy()
-      hear: sinon.spy()
+      router:
+        post: sinon.spy()
     hubotAlert @robot
 
-  it 'registers a respond listener', ->
-    expect(@robot.respond).to.have.been.calledWith(/hello/)
-
-  it 'registers a hear listener', ->
-    expect(@robot.hear).to.have.been.calledWith(/orly/)
+  it 'registers a POST listener', ->
+    expect(@robot.router.post).to.have.been.calledWith '/hubot/alert/:token'
