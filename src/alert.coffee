@@ -28,7 +28,7 @@ getAlertFromRequest = (req, res, next) ->
   errors.push 'Need to specify what rooms' unless rooms?
   errors.push 'Need to specify a message' unless message?
   if errors.length
-    return next messages
+    return next errors
   level = 'info' unless level in LEVELS
   rooms = rooms.split ',' if typeof rooms is 'string'
   req.alert =
