@@ -32,5 +32,6 @@ message:  'Some message to tell everyone'
 The above request will alert the "shell" room with:
 
 ```
-hubot> error: Some message to tell everyone
+External message received from xxx.xxx.xxx.xxx
+:rotating_light: Some message to tell everyone
 ```
