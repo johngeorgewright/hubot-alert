@@ -1,5 +1,7 @@
 # hubot-alert
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/johngeorgewright/hubot-alert.svg)](https://greenkeeper.io/)
+
 Excepts HTTP POSTs to alert specific rooms
 
 ## Installation
